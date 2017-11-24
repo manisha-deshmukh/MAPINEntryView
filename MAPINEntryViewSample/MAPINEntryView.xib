@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MAPINEntryView">
+            <connections>
+                <outlet property="contentView" destination="7SA-fw-lf8" id="5PT-UL-pRQ"/>
+                <outlet property="et_textField" destination="ptw-g7-4q4" id="RNU-xq-DRf"/>
+                <outlet property="pinEntryView" destination="OoT-UM-gu2" id="EB8-hV-xqa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="7SA-fw-lf8">
+            <rect key="frame" x="0.0" y="0.0" width="704" height="83"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ptw-g7-4q4">
+                    <rect key="frame" x="18" y="33" width="8" height="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" keyboardAppearance="light" returnKeyType="done"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OoT-UM-gu2" customClass="PINEntryView">
+                    <rect key="frame" x="0.0" y="0.0" width="704" height="83"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="OoT-UM-gu2" secondAttribute="trailing" id="4cB-YH-33M"/>
+                <constraint firstItem="ptw-g7-4q4" firstAttribute="leading" secondItem="7SA-fw-lf8" secondAttribute="leading" constant="18" id="4jc-mM-be6"/>
+                <constraint firstItem="OoT-UM-gu2" firstAttribute="top" secondItem="7SA-fw-lf8" secondAttribute="top" id="7CS-ci-gmT"/>
+                <constraint firstItem="OoT-UM-gu2" firstAttribute="leading" secondItem="7SA-fw-lf8" secondAttribute="leading" id="I61-ja-PSA"/>
+                <constraint firstAttribute="bottom" secondItem="OoT-UM-gu2" secondAttribute="bottom" id="IrE-YO-v3l"/>
+                <constraint firstItem="ptw-g7-4q4" firstAttribute="top" secondItem="7SA-fw-lf8" secondAttribute="top" constant="33" id="efe-hL-TRE"/>
+                <constraint firstAttribute="bottom" secondItem="ptw-g7-4q4" secondAttribute="bottom" constant="20" id="kCe-Bt-gxb"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="257" y="-562.5"/>
+        </view>
+    </objects>
+</document>
