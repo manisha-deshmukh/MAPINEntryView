@@ -68,6 +68,11 @@
     [_pinEntryView setNeedsDisplay];
     
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [_et_textField becomeFirstResponder];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -77,8 +82,10 @@
     }
     if ([string isEqualToString:@""]) {
         //deletion
-        userEntryString = [[userEntryString substringWithRange:NSMakeRange(0, userEntryString.length-1)] mutableCopy];
-        _pinEntryView.userInput = userEntryString;
+        if (![userEntryString isEqualToString:@""]) {
+            userEntryString = [[userEntryString substringWithRange:NSMakeRange(0, userEntryString.length-1)] mutableCopy];
+            _pinEntryView.userInput = userEntryString;
+        }
     }
     else{
         userEntryString = [[userEntryString stringByAppendingString:string] mutableCopy];
