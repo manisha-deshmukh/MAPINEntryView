@@ -1,25 +1,3 @@
-/**MIT License
- 
- *Copyright (c) 2017 manisha-deshmukh
- 
- *Permission is hereby granted, free of charge, to any person obtaining a copy
- *of this software and associated documentation files (the "Software"), to deal
- *in the Software without restriction, including without limitation the rights
- *to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *copies of the Software, and to permit persons to whom the Software is
- *furnished to do so, subject to the following conditions:
- 
- *The above copyright notice and this permission notice shall be included in all
- *copies or substantial portions of the Software.
- 
- *THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- *SOFTWARE.
- */
 
 #import <UIKit/UIKit.h>
 @protocol PINEntryViewDelegate
@@ -35,31 +13,40 @@
 @property(nonatomic, assign)CGFloat genericLeadingTrailingSpace;
 @property(nonatomic, assign)CGFloat genericTopBottomSpace;
 @property(nonatomic, assign)CGFloat sizeOfDot;
+@property(assign)BOOL needToShowBorder;
+@property(nonatomic, assign)CGFloat borderWidth;
 
 @property(nonatomic, assign)CGFloat fontSize;
 
 @property(nonatomic, strong)UIColor *dotColor;
 @property(nonatomic, strong)UIColor *boxColor;
+@property(nonatomic, strong)UIColor *borderColor;
 
-@property(nonatomic, strong)UITextField *et_TextField;
+@property(nonatomic, strong)UITextField *hiddenTextField;
 @property(nonatomic, assign) id pinEntryDelegate;
 
 @end
 
 @interface MAPINEntryView : UIView
 @property (strong, nonatomic) IBOutlet UIView *contentView;
-@property (weak, nonatomic) IBOutlet UITextField *et_textField;
+@property (weak, nonatomic) IBOutlet UITextField *hiddenTextField;
 @property (weak, nonatomic) IBOutlet PINEntryView *pinEntryView;
 
 @property(nonatomic, assign)NSInteger numberOfItemsToBeDisplayed;
+
 @property(nonatomic, assign)CGFloat spacingBetweenBoxes;
 @property(nonatomic, assign)CGFloat genericLeadingTrailingSpace;
 @property(nonatomic, assign)CGFloat genericTopBottomSpace;
+
 @property(nonatomic, assign)CGFloat sizeOfDot;
+@property(nonatomic, strong)UIColor *dotColor;
+
+@property(assign)BOOL needToShowBorder;
+@property(nonatomic, assign)CGFloat borderWidth;
+@property(nonatomic, strong)UIColor *borderColor;
+
 
 @property(nonatomic, assign)CGFloat fontSize;
-
-@property(nonatomic, strong)UIColor *dotColor;
 @property(nonatomic, strong)UIColor *boxColor;
 
 @property(nonatomic, assign) id pinContainerDelegate;

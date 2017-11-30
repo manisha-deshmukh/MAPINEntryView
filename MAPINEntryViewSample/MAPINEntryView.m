@@ -1,25 +1,3 @@
-/**MIT License
- 
- *Copyright (c) 2017 manisha-deshmukh
- 
- *Permission is hereby granted, free of charge, to any person obtaining a copy
- *of this software and associated documentation files (the "Software"), to deal
- *in the Software without restriction, including without limitation the rights
- *to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *copies of the Software, and to permit persons to whom the Software is
- *furnished to do so, subject to the following conditions:
- 
- *The above copyright notice and this permission notice shall be included in all
- *copies or substantial portions of the Software.
- 
- *THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- *SOFTWARE.
- */
 
 #import "MAPINEntryView.h"
 
@@ -47,9 +25,9 @@
     [self addSubview:self.contentView];
     self.contentView.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     userEntryString = [[NSMutableString alloc] init];
-    self.et_textField.delegate = self;
+    self.hiddenTextField.delegate = self;
     [self setupPinView];
-    [_et_textField becomeFirstResponder];
+    [_hiddenTextField becomeFirstResponder];
     
 }
 
@@ -65,12 +43,17 @@
     _pinEntryView.userInput = @"";
     _pinEntryView.pinEntryDelegate = _pinContainerDelegate;
     _pinEntryView.fontSize = _fontSize;
+    
+    _pinEntryView.borderWidth = _borderWidth;
+    _pinEntryView.needToShowBorder = _needToShowBorder;
+    _pinEntryView.borderColor = _borderColor;
+    
     [_pinEntryView setNeedsDisplay];
     
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [_et_textField becomeFirstResponder];
+    [_hiddenTextField becomeFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -115,7 +98,10 @@
     // Drawing code
     [super drawRect:rect];
     boxSize = [self calculateSizeOfIndivisualBox];
-    yCoordinateForBox =  _genericTopBottomSpace;
+    if (!_needToShowBorder) {
+        _borderWidth = 0;
+    }
+    yCoordinateForBox =  _genericTopBottomSpace + _borderWidth;
     
     if ([_userInput isEqualToString:@""]) {
         [self drawBoxes];
@@ -137,9 +123,16 @@
         CGRect boxRect = CGRectMake((i*(boxSize.width+_spacingBetweenBoxes) + _genericLeadingTrailingSpace), yCoordinateForBox, boxSize.width, boxSize.height);
         
         CGContextRef context = UIGraphicsGetCurrentContext();
-        
         CGContextSetFillColorWithColor(context, _boxColor.CGColor);
         CGContextFillRect(context, boxRect);
+        
+        if (_needToShowBorder) {
+            CGContextSetStrokeColorWithColor(context, _borderColor.CGColor);
+            CGContextStrokeRectWithWidth(context, boxRect, 2);
+        }
+        else{
+            _borderWidth = 0.0;
+        }
     }
 }
 
@@ -175,15 +168,15 @@
     NSMutableParagraphStyle* textStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
     textStyle.alignment = NSTextAlignmentCenter;
     
-    NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Helvetica" size: _fontSize], NSForegroundColorAttributeName:_dotColor, NSParagraphStyleAttributeName: textStyle};
+    NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Lato-SemiBold" size: _fontSize], NSForegroundColorAttributeName:_dotColor, NSParagraphStyleAttributeName: textStyle};
     
     [[_userInput substringFromIndex:(_userInput.length - 1)] drawInRect: textRect withAttributes: textFontAttributes];
 }
 
 -(CGSize)calculateSizeOfIndivisualBox{
     
-    CGFloat desiredWidth = (self.bounds.size.width - 2*_genericLeadingTrailingSpace - _spacingBetweenBoxes*(_numberOfItemsToBeDisplayed -1))/_numberOfItemsToBeDisplayed;
-    CGFloat desiredHeight = self.bounds.size.height - 2*_genericTopBottomSpace;
+    CGFloat desiredWidth = (self.bounds.size.width - 2*_genericLeadingTrailingSpace - _spacingBetweenBoxes*(_numberOfItemsToBeDisplayed -1) )/_numberOfItemsToBeDisplayed;
+    CGFloat desiredHeight = self.bounds.size.height - 2*_genericTopBottomSpace - 2*_borderWidth;
     return CGSizeMake(desiredWidth, desiredHeight);
 }
 @end
